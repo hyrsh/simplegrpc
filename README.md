@@ -1,8 +1,21 @@
 ### Simple gRPC binary
 
-This is just a tool to send hello messages and receive server responses over gRPC.
+This can be used to simulate traffic. The dynamic interval settings can simulate different network congestions in distributed systems.
 
-You can adjust the client intervall in a typical time.Duration string (e.g. "1s", "1ms", "1m" ...)
+---
+
+### Config
+
+|Property | Info
+|-|-|
+|Listenport | server listening port
+|Interval | interval of client requests to the server
+|Target | server IP/URL for the client to connect to
+|Message | client message to send
+|Answer | server message to respond
+|Runtype | binary behaviour (client or server)
+
+---
 
 ### Docker Image
 
