@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grpc-client
+  name: grpc-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-client
+  template:
+    metadata:
+      labels:
+        app: grpc-client
+    spec:
+      containers:
+      - image: hyrsh/simplegrpc:1.0
+        name: simplegrpc
+        volumeMounts:
+        - name: config
+          mountPath: "/config.yml"
+          subPath: config.yml
+          readOnly: false
+        ports:
+        - containerPort: 8080
+        env:
+          - name: SGRPC_K8S_PODNAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+      volumes:
+      - name: config
+        projected:
+          sources:
+          - configMap:
+              name: sgrpc-client-cm
+---
+apiVersion: v1
+data:
+  config.yml: |
+    simple-grpc:
+        settings:
+            listenport: 8080
+            interval: 1s
+            target: grpc-server-svc.default.svc.cluster.local:8080
+            message: Hi from a simple gRPC client!
+            answer: Hi from a simple gRPC server!
+            runtype: client
+kind: ConfigMap
+metadata:
+  name: sgrpc-client-cm
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: grpc-client
+  name: grpc-client-svc
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: grpc-client
+  sessionAffinity: None
+  type: ClusterIP
