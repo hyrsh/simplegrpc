@@ -17,6 +17,11 @@ func Init() {
 	log.Println("Config check ...")
 
 	/*
+		Environment check (kubernetes)
+	*/
+	checkEnvVar()
+
+	/*
 		Settings checks
 	*/
 	checkPortUint(configstruct.CurrentConfig.SimpleGRPC.Settings.Listenport)
@@ -28,6 +33,17 @@ func Init() {
 
 	//Success message
 	log.Println("Config valid! Ready for launch!")
+}
+
+func checkEnvVar() {
+	pod := os.Getenv("SGRPC_K8S_PODNAME")
+	if pod == "" {
+		log.Println("No kubernetes pod name specified!")
+	} else {
+		log.Println("My name is: " + pod)
+		configstruct.CurrentConfig.SimpleGRPC.Settings.Message = configstruct.CurrentConfig.SimpleGRPC.Settings.Message + " (" + pod + ")"
+		configstruct.CurrentConfig.SimpleGRPC.Settings.Answer = configstruct.CurrentConfig.SimpleGRPC.Settings.Answer + "(" + pod + ")"
+	}
 }
 
 func checkRunType(t string) {

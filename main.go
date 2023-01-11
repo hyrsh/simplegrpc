@@ -11,7 +11,10 @@ import (
 )
 
 //On Windows
-//$env:CGO_ENABLED = 1; go build -ldflags='-s -w -extldflags "-static"' main.go
+//$env:CGO_ENABLED = 1; $env:GOOS = "windows"; $env:GOARCH = "amd64"; go build -o simplegrpc_win_x86_64.exe -ldflags='-s -w -extldflags "-static"' main.go
+
+//On Windows cross-compile for Linux
+//$env:CGO_ENABLED = 0; $env:GOOS = "linux"; $env:GOARCH = "amd64"; go build -o simplegrpc_linux_x86_64 -ldflags='-s -w -extldflags "-static"' main.go
 
 //On Linux (important for docker image building with "FROM scratch")
 //go build -a -tags netgo --ldflags '-extldflags "-static"'
