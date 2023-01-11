@@ -1,0 +1,15 @@
+syntax = "proto3";
+package protocompiled;
+option go_package="./protocompiled";
+
+message Message {
+    string message = 1;
+}
+
+message Answer {
+    string answer = 1;
+}
+
+service HelloService {
+    rpc Hello(Message) returns (Answer) {}
+}
