@@ -20,7 +20,7 @@ func Init() {
 		Settings checks
 	*/
 	checkPortUint(configstruct.CurrentConfig.SimpleGRPC.Settings.Listenport)
-	checkIntervall(configstruct.CurrentConfig.SimpleGRPC.Settings.Intervall)
+	checkIntervall(configstruct.CurrentConfig.SimpleGRPC.Settings.Interval)
 	checkAddress(configstruct.CurrentConfig.SimpleGRPC.Settings.Target)
 	checkMessage(configstruct.CurrentConfig.SimpleGRPC.Settings.Message)
 	checkMessage(configstruct.CurrentConfig.SimpleGRPC.Settings.Answer)

@@ -25,7 +25,7 @@ func StartServer() {
 	}
 	defer lstn.Close() //failsafe
 
-	//new grpc server with TLS credentials from certificates
+	//new grpc server
 	grpcServer := grpc.NewServer()
 
 	//register grpc

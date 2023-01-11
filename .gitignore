@@ -3,3 +3,5 @@
 /config-server.yml
 /protocompiled
 /main.exe
+/simplegrpc_win_x86_64.exe
+/simplegrpc_linux_x86_64

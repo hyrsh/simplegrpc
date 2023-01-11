@@ -15,7 +15,7 @@ type Server struct {
 	GRPC FUNCTIONS
 */
 
-//default hello world grpc call to make sure we are going over TLS
+//default hello world grpc call
 func (s *Server) Hello(ctx context.Context, message *protocompiled.Message) (*protocompiled.Answer, error) { //error maybe used but I am not sure yet
 	log.Println(message.Message)
 	return &protocompiled.Answer{Answer: configstruct.CurrentConfig.SimpleGRPC.Settings.Answer}, nil

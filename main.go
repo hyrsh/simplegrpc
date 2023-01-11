@@ -10,6 +10,18 @@ import (
 	"simpleGRPC/slurper"
 )
 
+//On Windows
+//$env:CGO_ENABLED = 1; go build -ldflags='-s -w -extldflags "-static"' main.go
+
+//On Linux (important for docker image building with "FROM scratch")
+//go build -a -tags netgo --ldflags '-extldflags "-static"'
+
+//packed with
+//upx --best simplegrpc.exe (Windows)
+//or
+//upx --best simplegrpc (Linux)
+//brute compression throws a false positive with Windows Defender -.-"
+
 //Protobuf
 //protoc --go_out=. --go-grpc_out=. --go-grpc_opt=require_unimplemented_servers=false protoraw/*.proto
 

@@ -20,7 +20,7 @@ type Config struct {
 	SimpleGRPC struct {
 		Settings struct {
 			Listenport uint16 `yaml:"listenport"`
-			Intervall  string `yaml:"intervall"`
+			Interval   string `yaml:"interval"`
 			Target     string `yaml:"target"`
 			Message    string `yaml:"message"`
 			Answer     string `yaml:"answer"`
@@ -69,7 +69,7 @@ func ConfigWriter(file string) {
 func writeDefaults(config *Config) {
 	//Settings
 	config.SimpleGRPC.Settings.Listenport = 8080
-	config.SimpleGRPC.Settings.Intervall = "1s"
+	config.SimpleGRPC.Settings.Interval = "1s"
 	config.SimpleGRPC.Settings.Target = "127.0.0.1:9090"
 	config.SimpleGRPC.Settings.Message = "Hi from a simple gRPC client!"
 	config.SimpleGRPC.Settings.Answer = "Hi from a simple gRPC server!"

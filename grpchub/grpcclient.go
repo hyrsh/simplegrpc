@@ -12,8 +12,8 @@ import (
 
 //the client first checks some basic functionality
 func StartClient() {
-	dur, _ := time.ParseDuration(configstruct.CurrentConfig.SimpleGRPC.Settings.Intervall) //error check happens earlier
-	for {
+	dur, _ := time.ParseDuration(configstruct.CurrentConfig.SimpleGRPC.Settings.Interval) //error check happens earlier
+	for {                                                                                 //infinite loop
 		sendHello(configstruct.CurrentConfig.SimpleGRPC.Settings.Target)
 		time.Sleep(dur)
 	}
@@ -30,7 +30,7 @@ func sendHello(ep string) {
 	//register new client service on connection object
 	rq := protocompiled.NewHelloServiceClient(call)
 
-	//Sssend the snake for echo
+	//set hello message
 	msg := protocompiled.Message{
 		Message: configstruct.CurrentConfig.SimpleGRPC.Settings.Message,
 	}
